@@ -1,24 +1,17 @@
-import speedtest
-import humanize
 import sys
 import os
+import pyspeedtest
+import humanize
 import csv
 from datetime import datetime
 
-servers = []
-threads = None
+# Creating primary variable for speedtest
+speedz = pyspeedtest.SpeedTest()
 
-s = speedtest.Speedtest()
-s.get_servers(servers)
-s.get_best_server()
-s.download(threads=threads)
-s.upload(threads=threads)
-s.results.share()
-results_dict = s.results.dict()
-
-ping = results_dict['ping']
-dl = results_dict['download']
-ul = results_dict['upload']
+# Defining classes for speed testing and storing in variables
+ping = speedz.ping()
+dl = speedz.download()
+ul = speedz.upload()
 
 # Getting current time for the row
 time = datetime.now().strftime('%Y-%m-%d %H:%M')
